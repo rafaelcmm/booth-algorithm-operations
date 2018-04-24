@@ -1,7 +1,0 @@
-*.o
-*.obj
-*.lib
-bin/
-*.cbp
-*.depend
-.gitignore
