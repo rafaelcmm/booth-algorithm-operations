@@ -2,17 +2,17 @@
 int complementar(int x) { return (~x) + 1; }
 
 int soma(int x, int y) {
-    int sum, carry;
-    sum = x ^ y;
-    carry = x & y;
-    while (carry != 0) {
-        carry = __leftShift(carry);
-        x = sum;
-        y = carry;
-        sum = x ^ y;
-        carry = x & y;
+    int result, acum;
+    result = x ^ y;
+    acum = x & y;
+    while (acum != 0) {
+        acum = __leftShift(acum);
+        x = result;
+        y = acum;
+        result = x ^ y;
+        acum = x & y;
     }
-    return sum;
+    return result;
 }
 
 int subtracao(int x, int y) { return soma(x, complementar(y)); }
