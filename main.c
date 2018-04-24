@@ -3,9 +3,10 @@
 #include "basicOperations.h"
 int main()
 {
-    int x = -5;
-    int y = 5;
+    int x = 5;
+    int y = 3;
 
     printf("%d\n", soma(x, y));
     printf("%d\n", subtracao(x, y));
+    produto(x, y);
 }

@@ -1,5 +1,4 @@
 #include "basicOperations.h";
-
 int complementar(int x) { return (~x) + 1; }
 
 int soma(int x, int y) {
@@ -18,6 +17,14 @@ int soma(int x, int y) {
 
 int subtracao(int x, int y) { return soma(x, complementar(y)); }
 
+void produto(int x, int y) {
+    //TODO
+}
+
+void divisao(int x, int y) {
+    //TODO
+}
+
 void int2bin(int n){
     static char bin[4];
     int original = n;
@@ -26,12 +33,13 @@ void int2bin(int n){
     for(x=0; x<4; x++)
     {
         bin[x] = n & 0x8 ? '1' : '0';
-        n <<= 1;
+        n = __leftShift(n);
     }
-    printf(" O binário de %d é %s \n", original, bin);
+    printf("%s", bin);
 }
 
 //PRIVATE FUNCTIONS
-
+int __extractLastBit(int x) { return x & 1; }
 int __rightShift(int x) { return x >> 1; }
 int __leftShift(int x) { return x << 1; }
+
