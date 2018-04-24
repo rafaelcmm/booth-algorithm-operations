@@ -8,4 +8,6 @@ int divisao(int x, int y);
 
 int complementar(int x);
 
+void int2bin(int n);
+
 #endif // BASICOPERATIONS_H_INCLUDED
