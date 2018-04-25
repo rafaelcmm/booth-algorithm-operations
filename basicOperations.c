@@ -20,7 +20,7 @@ void __sumAndRightShift(multiplicacao* m) {
     (*m).A = soma((*m).A, (*m).M);
     __justRightShift(m);
 }
-int __printBoothStep(multiplicacao m) {
+void __printBoothStep(multiplicacao m) {
     int2bin(m.A);
     printf("    ");
     int2bin(m.Q);
