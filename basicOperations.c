@@ -47,23 +47,25 @@ int __leftShift(int x) { return x << 1; }
 int complementar(int x) { return (~x) + 1; }
 
 int soma(int x, int y) {
-    int result, acum;
-    result = x ^ y;
-    acum = x & y;
-    while (acum != 0) {
-        acum = __leftShift(acum);
-        x = result;
-        y = acum;
-        result = x ^ y;
-        acum = x & y;
+    int tmp = x;
+    x = x ^ y;
+    y = tmp & y;
+    if (y != 0) {
+        y = __leftShift(y);
+        soma(x, y);
+    } else {
+        return x;
     }
-    return result;
 }
 
 int subtracao(int x, int y) { return soma(x, complementar(y)); }
 
 void produto(multiplicacao m) {
     if (m.counter == 4) {
+        if (__extractFirstBit(m.Q) == 1 || __extractFirstBit(m.M) == 1) {
+            printf("Overload de valores!!! (Operacao maxima: 7 x 7)");
+            return;
+        }
         printf("--------- ESTADO INICIAL ----------\n");
         __printBoothStep(m);
         printf("-----------------------------------\n");
