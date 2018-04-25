@@ -1,30 +1,24 @@
 #include "basicOperations.h";
 //PRIVATE FUNCTIONS
-multiplicacao __justRightShift(multiplicacao m) {
-    int lastABit = __extractLastBit(m.A);
-    int firstQBit = __extractFirstBit(m.Q);
-    int lastQBit = __extractLastBit(m.Q);
-    m.A = __rightShift(m.A);
-    m.Q = __rightShift(m.Q);
+void __justRightShift(multiplicacao* m) {
+    int lastABit = __extractLastBit((*m).A);
+    int firstQBit = __extractFirstBit((*m).Q);
+    int lastQBit = __extractLastBit((*m).Q);
+    (*m).A = __rightShift((*m).A);
+    (*m).Q = __rightShift((*m).Q);
     if (lastABit == 1 && firstQBit == 0)
-        m.Q = m.Q + 8;
+        (*m).Q = (*m).Q + 8;
     if (lastABit == 0 && firstQBit == 1)
-        m.Q = m.Q - 8;
-    m.Q_1 = lastQBit;
-
-    return m;
+        (*m).Q = (*m).Q - 8;
+    (*m).Q_1 = lastQBit;
 }
-multiplicacao __subtractAndRightShift(multiplicacao m) {
-    m.A = subtracao(m.A, m.M);
-    m = __justRightShift(m);
-
-    return m;
+void __subtractAndRightShift(multiplicacao* m) {
+    (*m).A = subtracao((*m).A, (*m).M);
+    __justRightShift(m);
 }
-multiplicacao __sumAndRightShift(multiplicacao m) {
-    m.A = soma(m.A, m.M);
-    m = __justRightShift(m);
-
-    return m;
+void __sumAndRightShift(multiplicacao* m) {
+    (*m).A = soma((*m).A, (*m).M);
+    __justRightShift(m);
 }
 int __printBoothStep(multiplicacao m) {
     int2bin(m.A);
@@ -73,17 +67,17 @@ void produto(multiplicacao m) {
 
     if (m.counter > 0) {
         if (__extractLastBit(m.Q) == 1 && m.Q_1 == 0) {
-            m = __subtractAndRightShift(m);
+            __subtractAndRightShift(&m);
             m.counter--;
             __printBoothStep(m);
             produto(m);
         } else if (__extractLastBit(m.Q) == 0 && m.Q_1 == 1) {
-            m = __sumAndRightShift(m);
+            __sumAndRightShift(&m);
             m.counter--;
             __printBoothStep(m);
             produto(m);
         } else {
-            m = __justRightShift(m);
+            __justRightShift(&m);
             m.counter--;
             __printBoothStep(m);
             produto(m);
